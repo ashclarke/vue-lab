@@ -1,0 +1,19 @@
+{
+  "name": "vue-lab",
+  "version": "1.0.0",
+  "description": "Experimenting with Vue",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashclarke/vue-lab.git"
+  },
+  "author": "Ash Clarke",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/ashclarke/vue-lab/issues"
+  },
+  "homepage": "https://github.com/ashclarke/vue-lab#readme"
+}
