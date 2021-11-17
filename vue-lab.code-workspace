@@ -1,0 +1,11 @@
+{
+    "folders": [
+        {
+            "name": "Galaxy Explorer",
+            "path": "./galaxy-explorer"
+        }
+    ],
+    "settings": {
+        "editor.tabSize": 2
+    }
+}
