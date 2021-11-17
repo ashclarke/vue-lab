@@ -1,11 +1,16 @@
 <template>
-  <div class="explor">
-    <h1>Explore the Galaxy</h1>
-  </div>
+  <CharacterExplorer />
 </template>
 
 <script lang="ts">
-import { Vue } from "vue-class-component";
+import { Options, Vue } from "vue-class-component";
 
-export default class Explore extends Vue {}
+import CharacterExplorer from "@/components/character-explorer/CharacterExplorer.vue";
+
+@Options({
+  components: {
+    CharacterExplorer,
+  },
+})
+export default class Characters extends Vue {}
 </script>

@@ -1,0 +1,12 @@
+input {
+    padding: var(--base-spacing--quarter);
+    border: var(--base-border-style);
+}
+
+label {
+    font-weight: 500;
+
+    span + input {
+        margin-left: var(--base-spacing--half);
+    }
+}

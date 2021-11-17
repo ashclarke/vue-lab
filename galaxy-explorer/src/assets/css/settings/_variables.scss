@@ -1,0 +1,18 @@
+:root {
+  // Spacing
+  --base-spacing: 1rem;
+  --base-spacing--half: 0.5rem;
+  --base-spacing--quarter: 0.25rem;
+
+  // Theming
+  --base-background-color: rgb(255, 255, 255);
+  --base-background-color--dimmed: rgb(225, 225, 225);
+  --base-border-color: rgb(230, 230, 230);
+  --base-border-style: 1px solid var(--base-border-color);
+
+  // Header
+  --header-background-color: rgb(27, 27, 27);
+  --header-text-color: rgb(225, 225, 225);
+  --header-text-color--hover: rgb(233, 233, 233);
+  --header-text-color--active: rgb(0, 160, 100);
+}
