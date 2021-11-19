@@ -1,7 +1,7 @@
 <template>
   <ul class="character-list">
     <li v-for="character of characters" :key="character.id">
-      <CharacterListRow :character="{ character }" />
+      <CharacterListRow :character="character" />
     </li>
   </ul>
 </template>
@@ -23,8 +23,14 @@ import { CharacterData } from "@/models/characters";
   components: {
     CharacterListRow,
   },
+  props: {
+    characters: {
+      required: true,
+      type: Array,
+    },
+  },
 })
 export default class CharacterList extends Vue {
-  public characters: Array<CharacterData> = [];
+  characters!: Array<CharacterData>;
 }
 </script>

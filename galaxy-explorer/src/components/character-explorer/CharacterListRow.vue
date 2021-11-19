@@ -1,23 +1,23 @@
 <template>
   <div class="list__row">
     <div class="column">
-      <span>{{ character.name }}</span>
+      <span>{{ character?.name ?? "-" }}</span>
     </div>
     <div class="column">
-      <span>{{ character.height }}</span>
+      <span>{{ character?.height ?? "-" }}</span>
     </div>
     <div class="column">
-      <span>{{ character.mass }}</span>
+      <span>{{ character?.mass ?? "-" }}</span>
     </div>
     <div class="column">
-      <span>{{ character.created }}</span>
+      <span>{{ character?.created ?? "-" }}</span>
     </div>
     <div class="column">
-      <span>{{ character.edited }}</span>
+      <span>{{ character?.edited ?? "-" }}</span>
     </div>
     <div class="column">
-      <span @click="selectPlanet(character.planet)">
-        {{ character.planet }}
+      <span @click="selectPlanet(character.homeworld)">
+        {{ character?.homeworld?.name ?? "-" }}
       </span>
     </div>
   </div>
@@ -31,11 +31,25 @@
 </style>
 
 <script lang="ts">
-import { Vue } from "vue-class-component";
+import { Options, Vue } from "vue-class-component";
 
-import { CharacterData } from "@/models/characters";
+import { Character } from "@/models/characters";
 
+import { Planet } from "@/models/planets";
+
+@Options({
+  props: {
+    character: {
+      required: true,
+      type: Character,
+    },
+  },
+})
 export default class CharacterListRow extends Vue {
-  character!: CharacterData;
+  character!: Character;
+
+  selectPlanet(planet: Planet) {
+    console.log(planet);
+  }
 }
 </script>
