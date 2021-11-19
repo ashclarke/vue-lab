@@ -24,9 +24,13 @@
 </template>
 
 <style scoped lang="scss">
-.column {
+.list__row {
   display: grid;
-  grid-template-columns: minmax(10em, 1fr);
+  grid-template-columns: repeat(6, minmax(10em, 1fr));
+}
+.column {
+  padding: var(--base-spacing--quarter) var(--base-spacing--half);
+  font-variant-numeric: tabular-nums;
 }
 </style>
 
