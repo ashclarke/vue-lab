@@ -1,21 +1,34 @@
 import { PlanetData } from "@/models/planets";
+import { UNKNOWN } from "@/utils/messaging";
 
 export class Planet {
-    public readonly climate: string;
+  public readonly climate: string;
 
-    public readonly diameter: string;
+  public readonly diameter: string;
 
-    public readonly name: string;
+  public readonly id: number;
 
-    public readonly population: string;
+  public readonly name: string;
 
-    constructor(data: PlanetData) {
-        this.climate = data?.climate ?? "Unknown";
+  public readonly population: string;
 
-        this.diameter = data?.diameter ?? "Unknown";
+  constructor(data: PlanetData) {
+    this.climate = data?.climate ?? UNKNOWN;
 
-        this.name = data?.name ?? "Unknown";
+    this.diameter = data?.diameter ?? UNKNOWN;
 
-        this.population = data?.population ?? "Unknown";
+    this.id = data?.id ?? -1;
+
+    if (this.id < 0) {
+      throw new Error("Planet #constructor: Id provided is invalid.");
     }
+
+    this.name = data?.name ?? UNKNOWN;
+
+    this.population = data?.population ?? UNKNOWN;
+  }
+
+  public static from(data: PlanetData): Planet {
+    return new Planet(data);
+  }
 }

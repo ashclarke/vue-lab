@@ -1,9 +1,14 @@
 import { AxiosInstance } from "axios";
 
-import { API_CONFIGURATION, StarWarsApi } from "@/models/apis/StarWarsApi";
+import { API_CONFIGURATION, StarWarsApi } from "@/models/apis";
+
 import { Character, CharacterData } from "@/models/characters";
 
-import * as people from "../../../tests/fixtures/people";
+import { PlanetData } from "@/models/planets";
+
+import people from "../../../tests/fixtures/people";
+
+import planets from "../../../tests/fixtures/planets";
 
 import mockedAxios from "../../../tests/mocks/axios";
 
@@ -16,16 +21,32 @@ describe("StarWarsApi", () => {
 
   afterEach(() => {
     apiInstance = null;
-  })
+  });
 
-  it.only("should get a list of people", async () => {
+  it("should get a list of people", async () => {
     const api = new StarWarsApi(apiInstance!);
 
-    mockedAxios.get.mockResolvedValueOnce({
-      data: people.default as unknown as Array<CharacterData>
+    mockedAxios.get.mockImplementation((url: string) => {
+      let response;
+
+      if (url.endsWith("people")) {
+        response = {
+          data: people as { results: Array<CharacterData> },
+        };
+      } else if (url.endsWith("planets/1")) {
+        response = {
+          data: planets.results[0] as PlanetData,
+        };
+      } else if (url.endsWith("planets/21")) {
+        response = {
+          data: planets.results[1] as PlanetData,
+        };
+      }
+
+      return Promise.resolve(response);
     });
 
-    const characters = await api.getPeople();
+    const characters = await api.getCharacters();
 
     expect(mockedAxios.get).toHaveBeenCalledWith("people");
 
@@ -38,8 +59,8 @@ describe("StarWarsApi", () => {
       edited: "20/12/2014",
       name: "Owen Lars",
       height: "178",
-      homeworld: "https://swapi.dev/api/planets/1/",
-      mass: "120"
+      homeworldId: 1,
+      mass: "120",
     });
 
     const wilhuff = characters[1];
@@ -51,8 +72,12 @@ describe("StarWarsApi", () => {
       edited: "20/12/2014",
       name: "Wilhuff Tarkin",
       height: "180",
-      homeworld: "https://swapi.dev/api/planets/21/",
-      mass: "unknown"
+      homeworldId: 21,
+      mass: "unknown",
     });
+
+    expect(mockedAxios.get).toHaveBeenCalledWith("planets/1");
+
+    expect(mockedAxios.get).toHaveBeenCalledWith("planets/21");
   });
 });

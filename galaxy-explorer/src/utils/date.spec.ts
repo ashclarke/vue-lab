@@ -1,9 +1,7 @@
 import { formatIsoDate } from "@/utils/date";
 
 describe("Date Utilities", () => {
-
   describe("#formatIsoDate", () => {
-
     it("should return an empty string", () => {
       let input = null;
 
@@ -41,7 +39,5 @@ describe("Date Utilities", () => {
 
       expect(formatIsoDate(input)).toBe("18/09/2014");
     });
-
   });
-
-})
+});
