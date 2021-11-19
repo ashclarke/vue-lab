@@ -1,6 +1,7 @@
 const shortDateFormatter = new Intl.DateTimeFormat("en-gb", {
-  dateStyle: "short",
-  year: "numeric"
+  day: "2-digit",
+  month: "2-digit",
+  year: "numeric",
 });
 
 export function formatIsoDate(isoDate: string | null | undefined): string {
