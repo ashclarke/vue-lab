@@ -42,15 +42,21 @@
 }
 
 .character-list__header-row {
-  border-bottom: var(--base-border-style);
-
   span {
     font-weight: 600;
   }
 }
 
+li + li {
+  border-top: var(--base-border-style);
+}
+
 .column {
   padding: var(--base-spacing--quarter) var(--base-spacing--half);
+
+  & + .column {
+    border-left: var(--base-border-style);
+  }
 }
 </style>
 

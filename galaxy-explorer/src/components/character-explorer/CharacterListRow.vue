@@ -31,6 +31,19 @@
 .column {
   padding: var(--base-spacing--quarter) var(--base-spacing--half);
   font-variant-numeric: tabular-nums;
+
+  & + .column {
+    border-left: var(--base-border-style);
+  }
+
+  &:last-child span {
+    font-weight: 500;
+    cursor: pointer;
+
+    &:hover {
+      color: rgba(90, 90, 90);
+    }
+  }
 }
 </style>
 

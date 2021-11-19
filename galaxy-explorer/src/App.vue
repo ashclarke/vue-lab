@@ -21,16 +21,7 @@ export default class App extends Vue {}
 </script>
 
 <style lang="scss">
-html,
-body,
-#app,
 .content {
-  height: 100vh;
-}
-
-.content {
-  display: grid;
-  grid-template-rows: auto 1fr;
   background-color: var(--base-background-color--dimmed);
 
   header {
