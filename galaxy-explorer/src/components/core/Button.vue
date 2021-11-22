@@ -1,5 +1,5 @@
 <template>
-  <button class="button" type="button" @click="onClick()">
+  <button class="button" type="button" @click="onClick">
     {{ text }}
   </button>
 </template>
@@ -9,14 +9,18 @@ import { Options, Vue } from "vue-class-component";
 
 @Options({
   props: {
-    text: String,
+    onClick: {
+      type: Function,
+      required: true,
+    },
+    text: {
+      required: true,
+      type: String,
+    },
   },
 })
 export default class Button extends Vue {
+  onClick!: () => void;
   text!: string;
-
-  public onClick() {
-    console.log("click");
-  }
 }
 </script>

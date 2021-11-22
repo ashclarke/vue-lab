@@ -31,7 +31,7 @@
 <style scoped lang="scss">
 .list__row {
   display: grid;
-  grid-template-columns: repeat(6, minmax(10em, 1fr));
+  grid-template-columns: repeat(6, 1fr);
 }
 
 .character-list {

@@ -16,7 +16,7 @@
       <span>{{ character?.edited ?? "-" }}</span>
     </div>
     <div class="column">
-      <span @click="selectPlanet(character.homeworld)">
+      <span @click="selectPlanet(character.homeworldId)">
         {{ character?.homeworld?.name ?? "-" }}
       </span>
     </div>
@@ -26,7 +26,7 @@
 <style scoped lang="scss">
 .list__row {
   display: grid;
-  grid-template-columns: repeat(6, minmax(10em, 1fr));
+  grid-template-columns: repeat(6, 1fr);
 }
 .column {
   padding: var(--base-spacing--quarter) var(--base-spacing--half);
@@ -50,9 +50,11 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 
-import { Character } from "@/models/characters";
+import { useStore, Store } from "vuex";
 
-import { Planet } from "@/models/planets";
+import { AppState } from "@/store";
+
+import { Character } from "@/models/characters";
 
 @Options({
   props: {
@@ -63,10 +65,18 @@ import { Planet } from "@/models/planets";
   },
 })
 export default class CharacterListRow extends Vue {
-  character!: Character;
+  character?: Character = undefined;
 
-  selectPlanet(planet: Planet) {
-    console.log(planet);
+  store?: Store<AppState> = undefined;
+
+  created() {
+    const store: Store<AppState> = useStore();
+
+    this.store = store;
+  }
+
+  selectPlanet(planetId: number) {
+    this.store?.commit("selectPlanet", planetId);
   }
 }
 </script>

@@ -2,9 +2,9 @@
   <div class="searchbar">
     <label>
       <span>Search</span>
-      <input type="text" />
+      <input type="text" v-model="searchTerm" />
     </label>
-    <Button text="Go" />
+    <Button text="Go" :onClick="search" />
   </div>
 </template>
 
@@ -40,6 +40,20 @@ import Button from "@/components/core/Button.vue";
   components: {
     Button,
   },
+  props: {
+    onSearch: {
+      required: true,
+      type: Function,
+    },
+  },
 })
-export default class Searchbar extends Vue {}
+export default class Searchbar extends Vue {
+  onSearch!: (searchTerm: string) => void;
+
+  searchTerm = "";
+
+  search() {
+    this.onSearch(this.searchTerm);
+  }
+}
 </script>

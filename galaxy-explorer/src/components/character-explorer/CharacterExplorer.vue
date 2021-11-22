@@ -1,6 +1,6 @@
 <template>
   <div class="character-explorer">
-    <Searchbar />
+    <Searchbar :onSearch="search" />
     <CharacterList :characters="characters" />
   </div>
 </template>
@@ -37,10 +37,6 @@ export default class CharacterExplorer extends Vue {
 
   async search(searchTerm?: string) {
     this.characters = await StarWarsApi.getCharacters(searchTerm);
-  }
-
-  setup() {
-    this.search();
   }
 }
 </script>
