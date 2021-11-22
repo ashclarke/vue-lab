@@ -24,33 +24,6 @@ export default class App extends Vue {}
 .content {
   background-color: var(--base-background-color--dimmed);
 
-  header {
-    padding: var(--base-spacing--half);
-    background-color: var(--header-background-color);
-    display: grid;
-    grid-template-columns: 1fr max-content;
-    align-items: center;
-
-    h1 {
-      margin: 0;
-      color: var(--header-text-color);
-    }
-  }
-
-  nav {
-    a {
-      color: var(--header-text-color);
-
-      &:hover {
-        color: var(--header-text-color--hover);
-      }
-
-      &.router-link-exact-active {
-        color: var(--header-text-color--active);
-      }
-    }
-  }
-
   .view {
     margin: var(--base-spacing);
     padding: var(--base-spacing);
