@@ -1,9 +1,7 @@
 import { getIdFromUrl } from "@/utils/api";
 
 describe("API Utilities", () => {
-
   describe("#getIdFromUrl", () => {
-
     it("should return an empty string", () => {
       const input = "";
 
@@ -33,7 +31,5 @@ describe("API Utilities", () => {
 
       expect(getIdFromUrl(input)).toBe(55);
     });
-
   });
-
-})
+});

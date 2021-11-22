@@ -24,10 +24,13 @@ export class StarWarsApi {
     try {
       let results: Array<CharacterData>;
 
-      if (this.cache.raw.people.has(page)) {
-        results = this.cache.raw.people.get(page)!;
+      const existingCharacterData: Possibly<Array<CharacterData>> =
+        this.cache.getPeopleData(searchTerm);
+
+      if (existingCharacterData) {
+        results = existingCharacterData;
       } else {
-        let url = "people";
+        let url = `people?page=${page}`;
 
         if (searchTerm) {
           url = `${url}?search=${encodeURIComponent(searchTerm)}`;
@@ -39,7 +42,7 @@ export class StarWarsApi {
 
         results = data.results;
 
-        this.cache.raw.people.set(page, results);
+        this.cache.addPeopleData(searchTerm, results);
       }
 
       const characterPlanets: Map<number, Array<Character>> = new Map();
@@ -48,8 +51,11 @@ export class StarWarsApi {
         (characterData: CharacterData) => {
           const id = getIdFromUrl(characterData.url);
 
-          if (this.cache.characters.has(id)) {
-            return this.cache.characters.get(id)!;
+          const existingCharacter: Possibly<Character> =
+            this.cache.getCharacter(id);
+
+          if (existingCharacter) {
+            return existingCharacter;
           }
 
           const planetId = getIdFromUrl(characterData.homeworld);
@@ -60,13 +66,13 @@ export class StarWarsApi {
 
           const character = Character.from(characterData);
 
-          this.cache.characters.set(id, character);
+          this.cache.addCharacter(id, character);
 
           if (!characterPlanets.has(planetId)) {
             characterPlanets.set(planetId, []);
           }
 
-          characterPlanets.get(planetId)!.push(character);
+          characterPlanets.get(planetId)?.push(character);
 
           return character;
         }
@@ -110,25 +116,30 @@ export class StarWarsApi {
     }
 
     try {
-      if (this.cache.planets.has(id)) {
-        return this.cache.planets.get(id)!;
+      const existingPlanet: Possibly<Planet> = this.cache.getPlanet(id);
+
+      if (existingPlanet) {
+        return existingPlanet;
       }
 
       let data: PlanetData;
 
-      if (this.cache.raw.planets.has(id)) {
-        data = this.cache.raw.planets.get(id)!;
+      const existingPlanetData: Possibly<PlanetData> =
+        this.cache.getPlanetData(id);
+
+      if (existingPlanetData) {
+        data = existingPlanetData;
       } else {
         ({ data } = await this.api.get<PlanetData>(`planets/${id}`));
 
         data.id = getIdFromUrl(data.url);
 
-        this.cache.raw.planets.set(id, data);
+        this.cache.addPlanetData(id, data);
       }
 
       const planet = Planet.from(data);
 
-      this.cache.planets.set(id, planet);
+      this.cache.addPlanet(id, planet);
 
       return planet;
     } catch (error) {
@@ -150,6 +161,8 @@ export class StarWarsApi {
     this.cache.reset();
   }
 }
+
+// "https://swapi.dev/api/" - SSL Certificate expired 21/11/2021
 
 export const API_CONFIGURATION = {
   baseURL: "https://swapi.dev/api/",

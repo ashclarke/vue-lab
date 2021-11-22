@@ -24,6 +24,7 @@ describe("StarWarsApi", () => {
   });
 
   it("should get a list of people", async () => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- it is set in `beforeEach`
     const api = new StarWarsApi(apiInstance!);
 
     mockedAxios.get.mockImplementation((url: string) => {

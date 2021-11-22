@@ -3,6 +3,7 @@ export default {
     {
       name: "Owen Lars",
       height: "178",
+      id: 6,
       mass: "120",
       hair_color: "brown, grey",
       skin_color: "light",
@@ -25,6 +26,7 @@ export default {
     {
       name: "Wilhuff Tarkin",
       height: "180",
+      id: 12,
       mass: "unknown",
       hair_color: "auburn, grey",
       skin_color: "fair",
