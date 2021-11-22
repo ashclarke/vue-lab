@@ -30,10 +30,12 @@ export class StarWarsApi {
       if (existingCharacterData) {
         results = existingCharacterData;
       } else {
-        let url = `people?page=${page}`;
+        let url = `people`;
 
         if (searchTerm) {
           url = `${url}?search=${encodeURIComponent(searchTerm)}`;
+        } else {
+          url = `${url}?page=${page}`;
         }
 
         const { data } = await this.api.get<
@@ -162,7 +164,7 @@ export class StarWarsApi {
   }
 }
 
-// "https://swapi.dev/api/" - SSL Certificate expired 21/11/2021
+// "https://swapi.dev/api/" - SSL Certificate expired 21/11/2021 - 22/11/2022
 
 export const API_CONFIGURATION = {
   baseURL: "https://swapi.dev/api/",
