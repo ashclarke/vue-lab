@@ -6,6 +6,12 @@
         }
     ],
     "settings": {
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
+        "[typescript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "search.exclude": {
+          "**/node_modules": true
+        }
     }
 }
