@@ -2,7 +2,12 @@
   <div class="searchbar">
     <label>
       <span>Search</span>
-      <input type="text" v-model="searchTerm" />
+      <input
+        type="text"
+        v-model="searchTerm"
+        @keyup.enter="search"
+        @keyup.esc="clear"
+      />
     </label>
     <Button text="Go" :onClick="search" />
   </div>
@@ -51,6 +56,12 @@ export default class Searchbar extends Vue {
   onSearch!: (searchTerm: string) => void;
 
   searchTerm = "";
+
+  clear() {
+    this.searchTerm = "";
+
+    this.search();
+  }
 
   search() {
     this.onSearch(this.searchTerm);
