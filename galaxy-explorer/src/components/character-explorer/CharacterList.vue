@@ -23,6 +23,9 @@
     <li v-for="character of characters" :key="character.id">
       <CharacterListRow :character="character" />
     </li>
+    <li class="character-list__no-results-row" v-if="!characters?.length">
+      <span>No results found</span>
+    </li>
   </ul>
 </template>
 
@@ -31,6 +34,11 @@
 .character-list__header-row {
   display: grid;
   grid-template-columns: 2fr repeat(5, 1fr);
+}
+
+.character-list__no-results-row {
+  padding: var(--base-spacing--half);
+  text-align: center;
 }
 
 .character-list {
