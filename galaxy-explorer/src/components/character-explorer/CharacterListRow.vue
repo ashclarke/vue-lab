@@ -4,10 +4,10 @@
       <span>{{ character?.name ?? "-" }}</span>
     </div>
     <div class="column column--numeric">
-      <span>{{ character?.height ?? "-" }}</span>
+      <span>{{ character?.displayHeight ?? "-" }}</span>
     </div>
     <div class="column column--numeric">
-      <span>{{ character?.mass ?? "-" }}</span>
+      <span>{{ character?.displayMass ?? "-" }}</span>
     </div>
     <div class="column column--date">
       <span>{{ character?.created ?? "-" }}</span>

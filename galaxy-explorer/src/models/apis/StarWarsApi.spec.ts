@@ -57,11 +57,13 @@ describe("StarWarsApi", () => {
 
     expect(owen).toMatchObject({
       created: "10/12/2014",
+      displayHeight: "178",
+      displayMass: "120",
       edited: "20/12/2014",
       name: "Owen Lars",
-      height: "178",
+      height: 178,
       homeworldId: 1,
-      mass: "120",
+      mass: 120,
     });
 
     const wilhuff = characters[1];
@@ -70,11 +72,13 @@ describe("StarWarsApi", () => {
 
     expect(wilhuff).toMatchObject({
       created: "10/12/2014",
+      displayHeight: "180",
+      displayMass: "Unknown",
       edited: "20/12/2014",
       name: "Wilhuff Tarkin",
-      height: "180",
+      height: 180,
       homeworldId: 21,
-      mass: "unknown",
+      mass: null,
     });
 
     expect(mockedAxios.get).toHaveBeenCalledWith("planets/1");

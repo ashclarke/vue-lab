@@ -11,15 +11,23 @@ export class Character {
 
   public readonly edited: string;
 
-  public readonly height: string;
+  public readonly createdDate: Nullable<Date> = null;
+
+  public readonly editedDate: Nullable<Date> = null;
+
+  public readonly displayHeight: string;
+
+  public readonly displayMass: string;
+
+  public readonly height: Nullable<number>;
 
   public readonly id: number;
 
-  private homeworldPlanet: Planet | null = null;
+  private homeworldPlanet: Nullable<Planet> = null;
 
   public readonly homeworldId: number;
 
-  public readonly mass: string;
+  public readonly mass: Nullable<number>;
 
   public readonly name: string;
 
@@ -28,7 +36,23 @@ export class Character {
 
     this.edited = formatIsoDate(data.edited);
 
-    this.height = data?.height ?? UNKNOWN;
+    if (this.created !== UNKNOWN) {
+      this.createdDate = new Date(data.created);
+    }
+
+    if (this.edited !== UNKNOWN) {
+      this.editedDate = new Date(data.edited);
+    }
+
+    this.height = parseInt(data?.height);
+
+    if (Number.isNaN(this.height)) {
+      this.height = null;
+
+      this.displayHeight = UNKNOWN;
+    } else {
+      this.displayHeight = this.height.toString();
+    }
 
     this.id = data?.id ?? -1;
 
@@ -38,7 +62,15 @@ export class Character {
 
     this.homeworldId = data?.homeworldId ?? -1;
 
-    this.mass = data?.mass ?? UNKNOWN;
+    this.mass = parseInt(data?.mass);
+
+    if (Number.isNaN(this.mass)) {
+      this.mass = null;
+
+      this.displayMass = UNKNOWN;
+    } else {
+      this.displayMass = this.mass.toString();
+    }
 
     this.name = data?.name ?? UNKNOWN;
   }
