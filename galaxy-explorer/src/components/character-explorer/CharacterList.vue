@@ -1,25 +1,23 @@
 <template>
   <ul class="character-list">
     <li class="character-list__header-row">
-      <div class="list__row">
-        <div class="column">
-          <span>Name</span>
-        </div>
-        <div class="column">
-          <span>Height (cm)</span>
-        </div>
-        <div class="column">
-          <span>Mass (kg)</span>
-        </div>
-        <div class="column">
-          <span>Created</span>
-        </div>
-        <div class="column">
-          <span>Edited</span>
-        </div>
-        <div class="column">
-          <span>Homeworld</span>
-        </div>
+      <div class="column">
+        <span>Name</span>
+      </div>
+      <div class="column">
+        <span>Height (cm)</span>
+      </div>
+      <div class="column">
+        <span>Mass (kg)</span>
+      </div>
+      <div class="column">
+        <span>Created</span>
+      </div>
+      <div class="column">
+        <span>Edited</span>
+      </div>
+      <div class="column">
+        <span>Homeworld</span>
       </div>
     </li>
     <li v-for="character of characters" :key="character.id">
@@ -29,9 +27,10 @@
 </template>
 
 <style scoped lang="scss">
-.list__row {
+.list__row,
+.character-list__header-row {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: 2fr repeat(5, 1fr);
 }
 
 .character-list {

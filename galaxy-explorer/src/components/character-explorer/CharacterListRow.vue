@@ -3,19 +3,19 @@
     <div class="column">
       <span>{{ character?.name ?? "-" }}</span>
     </div>
-    <div class="column">
+    <div class="column column--numeric">
       <span>{{ character?.height ?? "-" }}</span>
     </div>
-    <div class="column">
+    <div class="column column--numeric">
       <span>{{ character?.mass ?? "-" }}</span>
     </div>
-    <div class="column">
+    <div class="column column--date">
       <span>{{ character?.created ?? "-" }}</span>
     </div>
-    <div class="column">
+    <div class="column column--date">
       <span>{{ character?.edited ?? "-" }}</span>
     </div>
-    <div class="column">
+    <div class="column column--link">
       <span @click="selectPlanet(character.homeworldId)">
         {{ character?.homeworld?.name ?? "-" }}
       </span>
@@ -26,8 +26,8 @@
 <style scoped lang="scss">
 .list__row {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
 }
+
 .column {
   padding: var(--base-spacing--quarter) var(--base-spacing--half);
   font-variant-numeric: tabular-nums;
@@ -37,13 +37,22 @@
   }
 
   &:last-child span {
-    font-weight: 500;
+    font-weight: 700;
     cursor: pointer;
 
     &:hover {
-      color: rgba(90, 90, 90);
+      color: rgba(140, 140, 140);
     }
   }
+}
+
+.column--date,
+.column--numeric {
+  text-align: right;
+}
+
+.column--link {
+  text-align: center;
 }
 </style>
 
@@ -76,7 +85,7 @@ export default class CharacterListRow extends Vue {
   }
 
   selectPlanet(planetId: number) {
-    this.store?.commit("selectPlanet", planetId);
+    this.store?.dispatch("selectPlanet", planetId);
   }
 }
 </script>

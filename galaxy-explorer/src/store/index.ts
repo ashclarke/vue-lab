@@ -1,4 +1,4 @@
-import { createStore } from "vuex";
+import { ActionContext, createStore } from "vuex";
 
 import { Planet } from "@/models/planets";
 
@@ -10,18 +10,34 @@ const appState: AppState = {
 
 export default createStore({
   state: appState,
+  getters: {
+    getSelectedPlanet: (state: AppState) => state.selectedPlanet,
+  },
   mutations: {
-    async selectPlanet(state: AppState, planetId: number | null) {
-      if (planetId === null) {
+    selectPlanet(state: AppState, planet: Planet) {
+      if (planet === null) {
         state.selectedPlanet = null;
 
         return;
       }
 
-      state.selectedPlanet = await StarWarsApi.getPlanet(planetId);
+      state.selectedPlanet = planet;
     },
   },
-  actions: {},
+  actions: {
+    async selectPlanet(
+      context: ActionContext<AppState, AppState>,
+      planetId: number | null
+    ) {
+      if (planetId == null) {
+        context.commit("selectPlanet", null);
+      } else {
+        const planet = await StarWarsApi.getPlanet(planetId);
+
+        context.commit("selectPlanet", planet);
+      }
+    },
+  },
   modules: {},
 });
 

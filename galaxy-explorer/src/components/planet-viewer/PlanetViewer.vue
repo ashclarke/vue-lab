@@ -1,6 +1,6 @@
 <template>
   <div class="planet-viewer">
-    <div class="planet">
+    <div class="planet-detail">
       <h3>{{ planet?.name ?? "-" }}</h3>
       <span>Population: {{ planet?.population ?? "-" }}</span>
       <span>Diameter: {{ planet?.diameter ?? "-" }}</span>
@@ -13,12 +13,24 @@
 <style scoped lang="scss">
 .planet-viewer {
   position: fixed;
-  width: 24rem;
-  height: 16rem;
-  left: 50%;
-  top: 50%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  place-items: center;
   z-index: 10;
-  transform: translate(-50%, -50%);
+  background-color: var(--overlay-background-color);
+  backdrop-filter: blur(2px);
+}
+
+.planet-detail {
+  width: 24rem;
+  height: auto;
+  padding: var(--base-spacing);
+  display: grid;
+  grid-template-rows: 1fr repeat(4, 2rem);
+  text-align: center;
   background-color: var(--base-background-color);
   box-shadow: 0px 0px 0.3px rgba(0, 0, 0, 0.011),
     0px 0px 0.8px rgba(0, 0, 0, 0.016), 0px 0px 1.5px rgba(0, 0, 0, 0.02),
@@ -28,12 +40,10 @@
     0.8px 0.8px 1.5px rgba(0, 0, 0, 0.035),
     1.3px 1.3px 2.7px rgba(0, 0, 0, 0.042), 2.5px 2.5px 5px rgba(0, 0, 0, 0.05),
     6px 6px 12px rgba(0, 0, 0, 0.07);
-}
 
-.planet {
-  display: grid;
-  grid-template-rows: 1fr repeat(4, 2rem);
-  text-align: center;
+  h3 {
+    margin: var(--base-spacing) 0;
+  }
 
   button {
     width: 4rem;
@@ -75,7 +85,7 @@ export default class PlanetViewer extends Vue {
   }
 
   close() {
-    this.store?.commit("selectPlanet", null);
+    this.store?.dispatch("selectPlanet", null);
   }
 }
 </script>
