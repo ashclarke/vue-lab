@@ -13,7 +13,8 @@ type RawDataCache = {
 import people from "../../../tests/fixtures/people";
 import planets from "../../../tests/fixtures/planets";
 
-const IS_SWAPI_WORKING = false;
+// Switches to test data if the API is down
+const IS_SWAPI_WORKING = true;
 
 export class StarWarsApiCache {
   private readonly characters: Map<number, Character>;
