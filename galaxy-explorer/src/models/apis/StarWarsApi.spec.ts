@@ -30,7 +30,7 @@ describe("StarWarsApi", () => {
     mockedAxios.get.mockImplementation((url: string) => {
       let response;
 
-      if (url.endsWith("people")) {
+      if (url.endsWith("people?page=1")) {
         response = {
           data: people as { results: Array<CharacterData> },
         };
@@ -49,7 +49,7 @@ describe("StarWarsApi", () => {
 
     const characters = await api.getCharacters();
 
-    expect(mockedAxios.get).toHaveBeenCalledWith("people");
+    expect(mockedAxios.get).toHaveBeenCalledWith("people?page=1");
 
     const owen = characters[0];
 

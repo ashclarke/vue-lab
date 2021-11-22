@@ -2,14 +2,12 @@ import { getIdFromUrl } from "@/utils/api";
 
 describe("API Utilities", () => {
   describe("#getIdFromUrl", () => {
-    it("should return an empty string", () => {
-      const input = "";
-
-      expect(getIdFromUrl(input)).toBe("");
-    });
-
     it("should return `-1`", () => {
-      let input = "/this/is/not/a/valid/id/url";
+      let input = "";
+
+      expect(getIdFromUrl(input)).toBe(-1);
+
+      input = "/this/is/not/a/valid/id/url";
 
       expect(getIdFromUrl(input)).toBe(-1);
 
